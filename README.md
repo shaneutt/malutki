@@ -80,6 +80,8 @@ $ curl -w '%{http_code}\n' ${MALUTKI_ADDR}/status/201
 
 Only `2XX`, `4XX` and `5XX` status codes are currently supported.
 
+[status]:https://developer.mozilla.org/docs/Web/HTTP/Status
+
 ## Contributing
 
 Contributions are welcome! Please feel free to create [issues][iss],

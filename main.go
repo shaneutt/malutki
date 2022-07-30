@@ -83,6 +83,9 @@ var statusRegexp = regexp.MustCompile(`^/status/([0-9]+)$`)
 
 func statusCode(path string) int {
 	submatches := statusRegexp.FindAllStringSubmatch(path, -1)
+	if len(submatches) != 1 || len(submatches[0]) != 2 {
+		return http.StatusBadRequest
+	}
 	code, _ := strconv.Atoi(submatches[0][1])
 
 	// return not found for invalid status codes
