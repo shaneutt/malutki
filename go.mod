@@ -1,6 +1,6 @@
 module github.com/shaneutt/malutki
 
-go 1.18
+go 1.19
 
 require (
 	github.com/kong/kubernetes-testing-framework v0.17.0
