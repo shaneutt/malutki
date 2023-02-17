@@ -30,7 +30,6 @@ IMAGE_TAG ?= latest
 docker.build:
 	docker buildx build \
 		-f Dockerfile \
-		--target distroless \
 		-t $(IMAGE_NAME):$(IMAGE_TAG) .
 
 # ------------------------------------------------------------------------------

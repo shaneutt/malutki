@@ -20,15 +20,13 @@ RUN CGO_ENABLED=0 go build -a -o /workspace/malutki main.go
 # Base
 # ------------------------------------------------------------------------------
 
-FROM gcr.io/distroless/static:nonroot AS distroless
+FROM alpine
 
 LABEL org.opencontainers.image.source https://github.com/shaneutt/malutki
 
 WORKDIR /
 
 COPY --from=build /workspace/malutki /malutki
-
-USER 65532:65532
 
 EXPOSE 8080
 
