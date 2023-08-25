@@ -37,30 +37,17 @@ Trivia: "malutki" means "tiny" in Polish.
 
 ## Quickstart (with Kubernetes)
 
-Generally speaking you'll use the container image for `malutki`, so one
-easy way to deploy it is as a Kubernetes `Pod`:
+You can deploy Malutki on your [Kubernetes] cluster using the example from this
+repository:
 
 ```console
-kubectl run malutki --image ghcr.io/shaneutt/malutki
+$ kubectl apply -f examples/deployment-with-loadbalancer-service.yaml
 ```
 
-Which can be exposed outside the cluster with a `LoadBalancer` type `Service`:
+This will create a Kubernetes `Deployment` which will be exposed outside of the
+cluster via a `LoadBalancer` type `Service`.
 
-```console
-kubectl expose pod malutki --type LoadBalancer --target-port 8080 --port 80
-```
-
-Once the `Service` has an address provisioned you can store it with:
-
-```console
-export MALUTKI_ADDR="$(kubectl get svc malutki -o=go-template='{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')"
-```
-
-And then reach the landing page:
-
-```console
-curl -v ${MALUTKI_ADDR}
-```
+[Kubernetes]:https://github.com/kubernetes/kubernetes
 
 ## Usage
 
