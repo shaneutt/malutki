@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------------------
+# Kubernetes Deployment Example
+# - - - - - - - - - - - - - - -
+#
+# This example deploys Malutki on a Kubernetes cluster using the Deployment API
+# and exposes it outside of the cluster using a Service of type LoadBalancer.
+#
+# If your cluster doesn't support LoadBalancer type services, then consider
+# modifying the Service to use ClusterIP or whatever else may be appropriate for
+# your setup.
+#
+# ------------------------------------------------------------------------------
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: malutki
+  labels:
+    app: malutki
+spec:
+  selector:
+    matchLabels:
+      app: malutki
+  template:
+    metadata:
+      labels:
+        app: malutki
+    spec:
+      containers:
+      - name: malutki
+        image: ghcr.io/shaneutt/malutki
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: malutki
+  labels:
+    app: malutki
+spec:
+  type: LoadBalancer
+  selector:
+    app: malutki
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+
